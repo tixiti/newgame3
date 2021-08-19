@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
-[CustomEditor(typeof(StaticPlayerController))]
+/*[CustomEditor(typeof(StaticPlayerController))]
 class DecalMeshHelperEditor : Editor {
     public override void OnInspectorGUI()
     {
@@ -11,7 +12,7 @@ class DecalMeshHelperEditor : Editor {
             controller.SetRayLength(controller.rayRenderer.size.y/2f);
         }
     }
-}
+}*/
 public class StaticPlayerController : MonoBehaviour
 {
     public bool isSave;
@@ -22,7 +23,9 @@ public class StaticPlayerController : MonoBehaviour
 
     private void Start()
     {
+        _animator = GetComponent<Animator>();
         _circleCollider2D = GetComponent<CircleCollider2D>();
+        _circleCollider2D.enabled = true;
     }
 
     public void SetRayLength(float rayLengthInput)
@@ -41,13 +44,15 @@ public class StaticPlayerController : MonoBehaviour
     }
     private static float ballScaleSpeed=0.02f,ballMoveSpeed=10;
     private CircleCollider2D _circleCollider2D;
+    private static readonly int IsIdle = Animator.StringToHash("isIdle");
+    private Animator _animator;
 
     private void Update()
     {
         if (Mathf.Abs(playerTransform.localPosition.y-_newLocalPosition)>0.05f)
         {
             playerTransform.localPosition =
-                Vector3.Lerp(playerTransform.localPosition, Vector3.up * _newLocalPosition, 0.05f);
+                Vector3.Lerp(playerTransform.localPosition, Vector3.up * _newLocalPosition, 10*Time.deltaTime);
         }
 
         if (!isSave) return;
@@ -55,9 +60,21 @@ public class StaticPlayerController : MonoBehaviour
         isSave = false;
     }
 
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        gameObject.layer = 0;
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
+        if (other.gameObject.layer.Equals(3))
+        {
+            gameObject.layer = 2;
+        }
         if (!other.gameObject.CompareTag("Ball")) return;
+        // AudioController.instance.PlaySound(AudioController.instance.playerReceiveSound);
+        _animator.SetBool(IsIdle,false);
+        _animator.Play("Scale");
         GetComponent<CircleCollider2D>().enabled = false;
         _ball = other.gameObject;
         var ballRigidbody2D = _ball.GetComponent<Rigidbody2D>();
@@ -74,6 +91,7 @@ public class StaticPlayerController : MonoBehaviour
             var forceX = ballMoveSpeed*Mathf.Cos(zRotation);
             var forceY = ballMoveSpeed*Mathf.Sin(zRotation);
             ballRigidbody2D.velocity = new Vector2(forceX, forceY);
+            AudioController.instance.PlaySound(AudioController.instance.shootSound);
             _newLocalPosition = -_newLocalPosition;
             while (_ball.transform.localScale.x < 1)
             {
@@ -87,6 +105,7 @@ public class StaticPlayerController : MonoBehaviour
         {
             yield return new WaitUntil(() => Vector3.Distance(_ball.transform.position, transform.position) > 1f);
             _circleCollider2D.enabled = true;
+            _animator.SetBool(IsIdle,true);
         }
     }
 }

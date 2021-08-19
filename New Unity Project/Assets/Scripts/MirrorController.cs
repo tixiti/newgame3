@@ -1,9 +1,38 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class MirrorController : MonoBehaviour
 {
+    private void Start()
+    {
+        GetComponent<BoxCollider2D>().enabled = true;
+    }
+
+    private void OnEnable()
+    {
+        var localScale = transform.localScale;
+        if (localScale.x==1)
+        {
+            var parent = transform.parent;
+            parent.GetChild(1).GetChild(0).localPosition = new Vector3(0, (localScale.y-1)*0.25f+0.5f, 1);
+            parent.GetChild(1).GetChild(1).localPosition = new Vector3(0, -((localScale.y-1)*0.25f+0.5f), 1);
+            parent.GetChild(1).eulerAngles = transform.eulerAngles;
+            parent.GetChild(1).localPosition = transform.localPosition;
+
+        }
+        if (localScale.y==1)
+        {
+            var parent = transform.parent;
+            parent.GetChild(1).GetChild(0).localPosition = new Vector3((localScale.x-1)*0.25f+0.5f,0, 1);
+            parent.GetChild(1).GetChild(1).localPosition = new Vector3(-((localScale.x-1)*0.25f+0.5f),0, 1);
+            parent.GetChild(1).eulerAngles = transform.eulerAngles;
+            parent.GetChild(1).localPosition = transform.localPosition;
+        }
+        transform.parent.GetChild(1).gameObject.SetActive(true);
+    }
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (!GameController.instance.isPlaying) return;

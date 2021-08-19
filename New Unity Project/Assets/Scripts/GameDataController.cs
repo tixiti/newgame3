@@ -17,12 +17,14 @@ public class LevelData
 public class PlayerData
 {
     public Vector rotation;
+    public Vector position;
 }
 [Serializable]
 public class RotatingPlayerData
 {
     public Vector oldRotation;
     public Vector newRotation;
+    public Vector position;
 }
 [Serializable]
 public class StaticPlayerData
@@ -36,7 +38,6 @@ public class StaticPlayerData
 public class PortalData
 {
     public Vector positionPort1, positionPort2;
-    public bool port1Movable,port2Movable;
 }
 [Serializable]
 public class ObstacleData
@@ -67,6 +68,7 @@ public class Vector
 public class GameDataController : MonoBehaviour
 {
     public static GameDataController instance;
+    public GameObject Tutorials;
     private void Awake()
     {
         if (instance == null)
@@ -74,25 +76,23 @@ public class GameDataController : MonoBehaviour
             instance = this;
         }
         else Destroy(this);
-#if UNITY_EDITOR
-        instance.SaveData();
-        #else
-        if (PlayerPrefs.GetString("FirstLog", "false") == "false")
+        if (PlayerPrefs.GetString("FirstLog23", "false") == "false")
         {
             PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetString("FirstLog", "true");
+            PlayerPrefs.SetString("FirstLog1", "true");
+            Instantiate(Tutorials);
             instance.SaveData();
         }
         else
         {
             instance.LoadData();
         }
-#endif
     }
-
     #region GameData
-
     public int currentLevel;
+    public int maxLevel;
+    public bool boughtNewMap;
+    public bool removeAds;
     public List<LevelData> levelData;
     
     #endregion
@@ -106,5 +106,7 @@ public class GameDataController : MonoBehaviour
         var data = SaveAndLoadSystem.LoadData();
         currentLevel = data.currentLevel;
         levelData = data.levelData;
+        maxLevel = data.maxLevel;
+        boughtNewMap = data.BoughtNewMap;
     }
 }

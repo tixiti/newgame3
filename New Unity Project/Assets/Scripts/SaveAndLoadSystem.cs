@@ -7,7 +7,7 @@ public static class SaveAndLoadSystem
     public static void SaveData(GameDataController gameDataController)
     {
         BinaryFormatter formatter = new BinaryFormatter();
-        string path = Application.persistentDataPath + "/puzzle.fun";
+        string path = Application.persistentDataPath + "/ball.fun";
 
         FileStream stream = new FileStream(path, FileMode.Create);
 
@@ -19,7 +19,7 @@ public static class SaveAndLoadSystem
     }
     public static GameData LoadData()
     {
-        string path = Application.persistentDataPath + "/puzzle.fun";
+        string path = Application.persistentDataPath + "/ball.fun";
         if (File.Exists(path))
         {
             BinaryFormatter formatter = new BinaryFormatter();

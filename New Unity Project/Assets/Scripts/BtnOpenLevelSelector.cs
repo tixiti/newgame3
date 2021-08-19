@@ -9,6 +9,11 @@ public class BtnOpenLevelSelector : MonoBehaviour
 
     private void OnMouseUpAsButton()
     {
+        if (mapName=="MyDinh")
+        {
+            UIController.instance.OpenNewMap();
+            return;
+        }
         UIController.instance.OpenLevelSelector(mapName);
     }
 }

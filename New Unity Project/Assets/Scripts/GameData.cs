@@ -5,6 +5,8 @@ public class GameData
 {
     
     public int currentLevel;
+    public int maxLevel;
+    public bool BoughtNewMap;
     public List<LevelData> levelData;
     
 
@@ -12,5 +14,7 @@ public class GameData
     {
         levelData = gdc.levelData;
         currentLevel = gdc.currentLevel;
+        maxLevel = gdc.maxLevel;
+        BoughtNewMap = gdc.boughtNewMap;
     }
 }
