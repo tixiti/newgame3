@@ -73,14 +73,6 @@ public class GoalController : MonoBehaviour
             }
             HintController.instance.Reset();
             yield return new WaitForSeconds(0.5f);
-            if (!GameDataController.instance.removeAds)
-            {
-                var i = Random.Range(0, 2);
-                if (i==0)
-                {
-                    AdsManager.instance.ShowIntestellarAds();
-                }
-            }
             gdc.SaveData();
             gc.RenderLevel(
                 gdc.currentLevel);

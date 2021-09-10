@@ -10,14 +10,6 @@ public class ObstacleController : MonoBehaviour
     {
         if (!GameController.instance.isPlaying) return;
         if (!other.CompareTag("Ball")) return;
-        if (!GameDataController.instance.removeAds)
-        {
-            var i = Random.Range(0, 2);
-            if (i==0)
-            {
-                AdsManager.instance.ShowIntestellarAds();
-            }
-        }
         AudioController.instance.PlaySound(AudioController.instance.obstacleDetectSound);
         other.GetComponent<CircleCollider2D>().enabled = false;
         other.GetComponent<Rigidbody2D>().velocity = Vector2.zero;

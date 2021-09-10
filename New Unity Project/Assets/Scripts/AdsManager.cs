@@ -12,7 +12,7 @@ public class AdsManager : MonoBehaviour
     private RewardedAd _rewardedAds;
 
     public bool publishingApp;
-    
+    public static bool isHintReady;
     private void Awake()
     {
         if (instance == null)
@@ -29,6 +29,15 @@ public class AdsManager : MonoBehaviour
         this.RequestBanner();
         this.RequestRewardedVideo();
         this.RequestInterstitial();
+    }
+
+    private void Update()
+    {
+        if (isHintReady)
+        {
+            HintController.instance.Next();
+            isHintReady = false;
+        }
     }
 
     private void InitAdsDone()
@@ -92,9 +101,9 @@ public class AdsManager : MonoBehaviour
     private void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-3940256099942544/1033173712";
+        string adUnitId = "ca-app-pub-9165042803570217/1899931803";
 #elif UNITY_IPHONE
-        string adUnitId = "ca-app-pub-3940256099942544/4411468910";
+        string adUnitId = "ca-app-pub-9165042803570217/1357840476";
 #else
         string adUnitId = "unexpected_platform";
 #endif
@@ -156,9 +165,9 @@ public class AdsManager : MonoBehaviour
     {
         string adUnitId;
 #if UNITY_ANDROID
-        adUnitId = "ca-app-pub-3940256099942544/5224354917";
+        adUnitId = "ca-app-pub-9165042803570217/1586910924";
 #elif UNITY_IPHONE
-            adUnitId = "ca-app-pub-3940256099942544/1712485313";
+            adUnitId = "ca-app-pub-9165042803570217/7413952677";
 #else
             adUnitId = "unexpected_platform";
 #endif
@@ -226,7 +235,7 @@ public class AdsManager : MonoBehaviour
 
     public void HandleUserGetHint(object sender, Reward args)
     {
-        HintController.instance.Next();
+        isHintReady = true;
     }
     #endregion
     public void ShowIntestellarAds()

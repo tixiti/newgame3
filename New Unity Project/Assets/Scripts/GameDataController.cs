@@ -79,7 +79,7 @@ public class GameDataController : MonoBehaviour
         if (PlayerPrefs.GetString("FirstLog23", "false") == "false")
         {
             PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetString("FirstLog1", "true");
+            PlayerPrefs.SetString("FirstLog23", "true");
             Instantiate(Tutorials);
             instance.SaveData();
         }

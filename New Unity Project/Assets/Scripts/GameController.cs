@@ -54,14 +54,6 @@ public class GameController : MonoBehaviour
         AudioController.instance.PlaySound(AudioController.instance.failSound);
         isPlaying = false;
         yield return new WaitForSeconds(0.5f);
-        if (!GameDataController.instance.removeAds)
-        {
-            var i = Random.Range(0, 2);
-            if (i==0)
-            {
-                AdsManager.instance.ShowIntestellarAds();
-            }
-        }
         ResetLevelSoft();
         GenerateLevelSoft(_gdc.levelData[_gdc.currentLevel]);
     }
@@ -572,6 +564,7 @@ public class GameController : MonoBehaviour
         if (levelIndex > 73)
         {
             UIController.instance.winPanel.SetActive(true);
+            AudioController.instance.PlaySound(AudioController.instance.winAllLevelSound);
             return;
         }
 
