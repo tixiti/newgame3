@@ -245,18 +245,13 @@ public class AdsManager : MonoBehaviour
             this._interstitial.Show();
         }
     }
-    public void ShowBannerAds()
-    {
-        AdRequest request = new AdRequest.Builder().Build();
-        _bannerView.LoadAd(request);
-    }
-    public void HideBannerAds()
-    {
-        _bannerView.Destroy();
-        RequestBanner();
-    }
     public void DisplayHintAds()
     {
+        if (Application.internetReachability==NetworkReachability.NotReachable)
+        {
+            UIController.instance.PopUpNotificationPanel("Check your internet connection and try again!");
+            return;
+        }
         if (_rewardedAds.IsLoaded())
         {
             _rewardedAds.Show();

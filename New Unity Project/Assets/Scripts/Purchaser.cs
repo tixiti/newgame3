@@ -93,6 +93,11 @@ using UnityEngine.Purchasing;
 
         public void BuyConsumable(int index)
         {
+            if (Application.internetReachability==NetworkReachability.NotReachable)
+            {
+                UIController.instance.PopUpNotificationPanel("Check your internet connection and try again!");
+                return;
+            }
             // Buy the consumable product using its general identifier. Expect a response either 
             // through ProcessPurchase or OnPurchaseFailed asynchronously.
             BuyProductID(consumableID[index]);
@@ -101,20 +106,25 @@ using UnityEngine.Purchasing;
 
         public void RemoveAds()
         {
+            if (Application.internetReachability==NetworkReachability.NotReachable)
+            {
+                UIController.instance.PopUpNotificationPanel("Check your internet connection and try again!");
+                return;
+            }
             // Buy the non-consumable product using its general identifier. Expect a response either 
             // through ProcessPurchase or OnPurchaseFailed asynchronously.
             BuyProductID(removeAdsId);
         }
 
 
-        public void BuySubscription(int index)
-        {
-            // Buy the subscription product using its the general identifier. Expect a response either 
-            // through ProcessPurchase or OnPurchaseFailed asynchronously.
-            // Notice how we use the general product identifier in spite of this ID being mapped to
-            // custom store-specific identifiers above.
-            BuyProductID(subscriptionID[index]);
-        }
+        // public void BuySubscription(int index)
+        // {
+        //     // Buy the subscription product using its the general identifier. Expect a response either 
+        //     // through ProcessPurchase or OnPurchaseFailed asynchronously.
+        //     // Notice how we use the general product identifier in spite of this ID being mapped to
+        //     // custom store-specific identifiers above.
+        //     BuyProductID(subscriptionID[index]);
+        // }
 
 
         void BuyProductID(string productId)

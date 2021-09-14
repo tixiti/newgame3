@@ -49,6 +49,7 @@ public class UIController : MonoBehaviour
     private Animator _statusNotificationAnimator;
     private static readonly int Speed = Animator.StringToHash("speed");
 
+    [Header("5K")] [SerializeField] private GameObject vietnamese5K, english5K;
     public void RenderLevel()
     {
         GameController.instance.RenderLevel(int.Parse(levelToRender.text));
@@ -56,6 +57,18 @@ public class UIController : MonoBehaviour
     private void Awake()
     {
         instance = this;
+    }
+
+    IEnumerator Run5K()
+    {
+        bool isVietnamese = true;
+        while (true)
+        {
+            vietnamese5K.SetActive(isVietnamese);
+            english5K.SetActive(!isVietnamese);
+            yield return new WaitForSeconds(24);
+            isVietnamese = !isVietnamese;
+        }
     }
 
     private void Start()
@@ -76,6 +89,8 @@ public class UIController : MonoBehaviour
             removeAdsBtn.SetActive(false);
             donateBtn.SetActive(true);
         }
+
+        StartCoroutine(Run5K());
     }
 
     public void PopUpNotificationPanel(string notification)
