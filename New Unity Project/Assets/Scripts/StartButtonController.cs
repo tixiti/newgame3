@@ -17,14 +17,15 @@ public class StartButtonController : MonoBehaviour
             GameController.instance.timeStart = Time.time;
             ball.GetComponent<CircleCollider2D>().enabled = true;
             ball.GetComponent<Rigidbody2D>().velocity = Vector2.left * speed;
-            if (MoveObject.currentMoveArea!=null)
-            {
-                animator = MoveObject.currentMoveArea.GetComponent<Animator>();
-                animator.Play("Close Move Object");
-                Debug.Log("Delete Current Move Object");
-                MoveObject.isCanSelectToMove = true;
-                Destroy(MoveObject.currentMoveArea.gameObject,0.5f);
-            }
+            GameController.instance.RemoveMoveObject();
+            // if (MoveObject.currentMoveArea!=null)
+            // {
+            //     animator = MoveObject.currentMoveArea.GetComponent<Animator>();
+            //     animator.Play("Close Move Object");
+            //     Debug.Log("Delete Current Move Object");
+            //     MoveObject.isCanSelectToMove = true;
+            //     Destroy(MoveObject.currentMoveArea.gameObject,0.5f);
+            // }
         }
     }
 }

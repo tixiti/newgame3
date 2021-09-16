@@ -2519,6 +2519,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 163851839011717007, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 163851839011717007, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7688846817892565526, guid: 12008f4eb640d5a48bba2de8d03bbe92,
         type: 3}
       propertyPath: m_Color.b
@@ -2658,6 +2668,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805434705288800707, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805434705288800707, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.77443886
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805434705288800707, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8805434705288800707, guid: 12008f4eb640d5a48bba2de8d03bbe92,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 12008f4eb640d5a48bba2de8d03bbe92, type: 3}
@@ -11564,6 +11594,7 @@ GameObject:
   m_Component:
   - component: {fileID: 626634369}
   - component: {fileID: 626634370}
+  - component: {fileID: 626634368}
   m_Layer: 0
   m_Name: Move Controller
   m_TagString: Untagged
@@ -11571,6 +11602,18 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &626634368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 626634367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64decffd8f0f4f541bc6d5c3c26f80b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &626634369
 Transform:
   m_ObjectHideFlags: 0
@@ -11592,7 +11635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 626634367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 123476b46dc01f74c86d73f14b7ad2b8, type: 3}
   m_Name: 
@@ -37259,7 +37302,7 @@ MonoBehaviour:
   notificationPanel: {fileID: 1444730186}
   notificationPanelText: {fileID: 53459029}
   hintPanel: {fileID: 1521384803}
-  instructionControl: {fileID: 551092339}
+  instructionControl: {fileID: 322467072}
   notifications: {fileID: 5268431254087778988, guid: 517d2fdbd27845244a0867cbb60b586c,
     type: 3}
   statusNotification: {fileID: 568945238}

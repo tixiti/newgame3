@@ -31,9 +31,9 @@ public class MenuClickController : MonoBehaviour
         switch (buttonName)
         {
             case ButtonName.Hint:
-                if (HintController.instance.currentHint>=((GameDataController.instance.levelData[GameDataController.instance.currentLevel].playerData.Count+GameDataController.instance.levelData[GameDataController.instance.currentLevel].rotatingPlayerData.Count)>=4?1:2))
+                if (HintController.instance.currentHint>=((GameDataController.instance.levelData[GameDataController.instance.currentLevel].playerData.Count+GameDataController.instance.levelData[GameDataController.instance.currentLevel].rotatingPlayerData.Count)>=4?2:3))
                 {
-                    UIController.instance.PopUpNotificationPanel("No hint more!");
+                    UIController.instance.PopUpNotificationPanel("No hint more for this level!");
                 }
                 else
                 {

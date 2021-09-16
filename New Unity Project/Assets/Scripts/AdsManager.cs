@@ -101,7 +101,8 @@ public class AdsManager : MonoBehaviour
     private void RequestInterstitial()
     {
 #if UNITY_ANDROID
-        string adUnitId = "ca-app-pub-9165042803570217/1899931803";
+        string adUnitId = "ca-app-pub-9165042803570217/1899931803"; //real
+        // string adUnitId = "ca-app-pub-3940256099942544/8691691433";//test
 #elif UNITY_IPHONE
         string adUnitId = "ca-app-pub-9165042803570217/1357840476";
 #else
@@ -165,7 +166,8 @@ public class AdsManager : MonoBehaviour
     {
         string adUnitId;
 #if UNITY_ANDROID
-        adUnitId = "ca-app-pub-9165042803570217/1586910924";
+        adUnitId = "ca-app-pub-9165042803570217/1586910924"; //real
+        // adUnitId = "ca-app-pub-3940256099942544/5224354917";
 #elif UNITY_IPHONE
             adUnitId = "ca-app-pub-9165042803570217/7413952677";
 #else

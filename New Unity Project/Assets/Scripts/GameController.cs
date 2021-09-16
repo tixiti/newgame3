@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -58,11 +59,11 @@ public class GameController : MonoBehaviour
         GenerateLevelSoft(_gdc.levelData[_gdc.currentLevel]);
     }
 
-    private int[] RandomPlayerPositionArray(int arrayLength)
+    private float[] RandomPlayerPositionArray(int arrayLength)
     {
-        var array = new int[arrayLength];
+        var array = new float[arrayLength];
 
-        for (var i = 0; i < arrayLength; i++) array[i] = (-(arrayLength / 2) + i) * 2;
+        for (var i = 0; i < arrayLength; i++) array[i] = (-(arrayLength / 2) + i) * 2.5f;
         for (var i = array.Length - 1; i > 0; i--)
         {
             var randomIndex = Random.Range(0, i + 1);
@@ -77,6 +78,19 @@ public class GameController : MonoBehaviour
         return array;
     }
 
+    public void RemoveMoveObject()
+    {
+        for (var i = 1; i < playerPrefabs.Length; i++)
+        {
+            if (!playerPrefabs[i].activeInHierarchy) continue;
+            playerPrefabs[i].transform.GetChild(playerPrefabs[i].transform.childCount-1).gameObject.SetActive(false);
+        }
+        for (var i = 0; i < rotatingPlayerPrefabs.Length; i++)
+        {
+            if (!rotatingPlayerPrefabs[i].activeInHierarchy) continue;
+            rotatingPlayerPrefabs[i].transform.GetChild(playerPrefabs[i].transform.childCount-1).gameObject.SetActive(false);
+        }
+    }
     // ReSharper disable Unity.PerformanceAnalysis
     public void GenerateLevel(LevelData levelData)
     {
@@ -183,6 +197,7 @@ public class GameController : MonoBehaviour
         {
             if (!playerPrefabs[i].activeInHierarchy) continue;
             playerPrefabs[i].transform.position = Vector3.down * 20 + Vector3.left * (3 * i);
+            playerPrefabs[i].transform.GetChild(playerPrefabs[i].transform.childCount-1).gameObject.SetActive(true);
             playerPrefabs[i].SetActive(false);
         }
 
@@ -224,6 +239,7 @@ public class GameController : MonoBehaviour
             rotatingPlayerPrefabs[i].transform.GetChild(2).gameObject.SetActive(true);
             rotatingPlayerPrefabs[i].GetComponent<CircleCollider2D>().enabled = true;
             rotatingPlayerPrefabs[i].transform.position = Vector3.down * 70 + Vector3.left * (3 * i);
+            rotatingPlayerPrefabs[i].transform.GetChild(rotatingPlayerPrefabs[i].transform.childCount-1).gameObject.SetActive(true);
             rotatingPlayerPrefabs[i].SetActive(false);
         }
 
@@ -250,6 +266,7 @@ public class GameController : MonoBehaviour
         {
             if (!playerPrefabs[i].activeInHierarchy) continue;
             playerPrefabs[i].SetActive(false);
+            playerPrefabs[i].transform.GetChild(playerPrefabs[i].transform.childCount-1).gameObject.SetActive(true);
         }
 
         for (var i = 0; i < obstaclePrefabs.Length; i++)
@@ -285,6 +302,7 @@ public class GameController : MonoBehaviour
             if (!rotatingPlayerPrefabs[i].activeInHierarchy) continue;
             rotatingPlayerPrefabs[i].transform.GetChild(2).gameObject.SetActive(true);
             rotatingPlayerPrefabs[i].GetComponent<CircleCollider2D>().enabled = true;
+            rotatingPlayerPrefabs[i].transform.GetChild(rotatingPlayerPrefabs[i].transform.childCount-1).gameObject.SetActive(true);
             rotatingPlayerPrefabs[i].SetActive(false);
         }
 
