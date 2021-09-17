@@ -14,7 +14,7 @@ public class TutorialsController : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(Player.transform.position,rightPosition)<0.5f&&!transform.GetChild(2).gameObject.activeInHierarchy)
+        if (Vector3.Distance(Player.transform.position,rightPosition)<0.5f&&!transform.GetChild(1).gameObject.activeInHierarchy)
         {
             transform.GetChild(1).gameObject.SetActive(true);
             transform.GetChild(0).gameObject.SetActive(false);
