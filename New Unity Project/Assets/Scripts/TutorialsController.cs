@@ -16,8 +16,8 @@ public class TutorialsController : MonoBehaviour
     {
         if (Vector3.Distance(Player.transform.position,rightPosition)<0.5f&&!transform.GetChild(2).gameObject.activeInHierarchy)
         {
-            transform.GetChild(2).gameObject.SetActive(true);
-            transform.GetChild(1).gameObject.SetActive(false);
+            transform.GetChild(1).gameObject.SetActive(true);
+            transform.GetChild(0).gameObject.SetActive(false);
         }
         
     }

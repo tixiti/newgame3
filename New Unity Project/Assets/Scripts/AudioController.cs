@@ -23,7 +23,7 @@ public class AudioController : MonoBehaviour
 
          if (audioClip==failSound||audioClip==ballBreakSound)
          {
-            if (!GameDataController.instance.removeAds)
+            if (!GameDataController.instance.removeAdvertising)
             {
                var i = Random.Range(0, 2);
                if (i==0)

@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
         _ballController = ball.GetComponent<BallController>();
         _BallCollider2D = ball.GetComponent<CircleCollider2D>();
         _gdc = GameDataController.instance;
-        RenderLevel(_gdc.currentLevel);
+        // RenderLevel(_gdc.currentLevel);
     }
 
     private Rigidbody2D _ballRb;
@@ -89,6 +89,11 @@ public class GameController : MonoBehaviour
         {
             if (!rotatingPlayerPrefabs[i].activeInHierarchy) continue;
             rotatingPlayerPrefabs[i].transform.GetChild(playerPrefabs[i].transform.childCount-1).gameObject.SetActive(false);
+        }
+        for (var i = 0; i < staticPlayerPrefabs.Length; i++)
+        {
+            if (!staticPlayerPrefabs[i].activeInHierarchy) continue;
+            staticPlayerPrefabs[i].transform.GetChild(0).GetChild(staticPlayerPrefabs[i].transform.GetChild(0).childCount-1).gameObject.SetActive(false);
         }
     }
     // ReSharper disable Unity.PerformanceAnalysis
@@ -230,6 +235,7 @@ public class GameController : MonoBehaviour
             if (!staticPlayerPrefabs[i].activeInHierarchy) continue;
             staticPlayerPrefabs[i].transform.position = Vector3.down * 60 + Vector3.left * (3 * i);
             staticPlayerPrefabs[i].transform.GetChild(0).GetComponent<CircleCollider2D>().enabled = true;
+            staticPlayerPrefabs[i].transform.GetChild(0).GetChild(staticPlayerPrefabs[i].transform.GetChild(0).childCount-1).gameObject.SetActive(true);
             staticPlayerPrefabs[i].SetActive(false);
         }
 
@@ -294,6 +300,7 @@ public class GameController : MonoBehaviour
         {
             if (!staticPlayerPrefabs[i].activeInHierarchy) continue;
             staticPlayerPrefabs[i].transform.GetChild(0).GetComponent<CircleCollider2D>().enabled = true;
+            staticPlayerPrefabs[i].transform.GetChild(0).GetChild(staticPlayerPrefabs[i].transform.GetChild(0).childCount-1).gameObject.SetActive(true);
             staticPlayerPrefabs[i].SetActive(false);
         }
 
@@ -590,6 +597,11 @@ public class GameController : MonoBehaviour
 
         if (levelIndex == 0 && PlayerPrefs.GetString("isLoadInstruction1", "false") == "false")
         {
+            if (PlayerPrefs.GetString("isFirstLog","false")=="false")
+            {
+                Instantiate(_gdc.Tutorials);
+                PlayerPrefs.SetString("isFirstLog", "true");
+            }
             StartCoroutine(OpenInstruction());
 
             IEnumerator OpenInstruction()

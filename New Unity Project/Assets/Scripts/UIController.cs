@@ -76,15 +76,16 @@ public class UIController : MonoBehaviour
         _statusNotificationAnimator = statusNotification.GetComponent<Animator>();
         ChangeMapSprite(GameDataController.instance.currentLevel > 55 ?1:0);
         _gdc = GameDataController.instance;
-        if (_gdc.currentLevel>55)
-        {
-            mapAnimator.Play("Map Anim MyDinh");
-        }
-        else
-        {
-            mapAnimator.Play("Map Anim ThongNhat");
-        }
-        if (_gdc.removeAds)
+        // if (_gdc.currentLevel>55)
+        // {
+        //     mapAnimator.Play("Map Anim MyDinh");
+        // }
+        // else
+        // {
+        //     mapAnimator.Play("Map Anim ThongNhat");
+        // }
+        BackToMap();
+        if (_gdc.removeAdvertising)
         {
             removeAdsBtn.SetActive(false);
             donateBtn.SetActive(true);

@@ -252,7 +252,7 @@ using UnityEngine.Purchasing;
                 Debug.Log(string.Format("ProcessPurchase: PASS. Product: '{0}'", args.purchasedProduct.definition.id));
                 UIController.instance.donateBtn.SetActive(true);
                 UIController.instance.removeAdsBtn.SetActive(false);
-                GameDataController.instance.removeAds = true;
+                GameDataController.instance.removeAdvertising = true;
                 GameDataController.instance.SaveData();
             }
             // Or ... an unknown product has been purchased by this user. Fill in additional products here....

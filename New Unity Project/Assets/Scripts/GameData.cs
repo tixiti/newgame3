@@ -5,6 +5,7 @@ public class GameData
 {
     
     public int currentLevel;
+    public bool removeAdvertising;
     public int maxLevel;
     public bool BoughtNewMap;
     public List<LevelData> levelData;
@@ -16,5 +17,6 @@ public class GameData
         currentLevel = gdc.currentLevel;
         maxLevel = gdc.maxLevel;
         BoughtNewMap = gdc.boughtNewMap;
+        removeAdvertising = gdc.removeAdvertising;
     }
 }

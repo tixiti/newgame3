@@ -69,6 +69,7 @@ public class GameDataController : MonoBehaviour
 {
     public static GameDataController instance;
     public GameObject Tutorials;
+    [SerializeField] private GameObject Block;
     private void Awake()
     {
         if (instance == null)
@@ -76,11 +77,11 @@ public class GameDataController : MonoBehaviour
             instance = this;
         }
         else Destroy(this);
-        if (PlayerPrefs.GetString("FirstLog234", "false") == "false")
+        Destroy(Block,2);
+        if (PlayerPrefs.GetString("First1", "false") == "false")
         {
             PlayerPrefs.DeleteAll();
-            PlayerPrefs.SetString("FirstLog234", "true");
-            Instantiate(Tutorials);
+            PlayerPrefs.SetString("First1", "true");
             instance.SaveData();
         }
         else
@@ -90,11 +91,10 @@ public class GameDataController : MonoBehaviour
     }
     #region GameData
     public int currentLevel;
+    public bool removeAdvertising;
     public int maxLevel;
     public bool boughtNewMap;
-    public bool removeAds;
     public List<LevelData> levelData;
-    
     #endregion
     public void SaveData()
     {
@@ -108,5 +108,6 @@ public class GameDataController : MonoBehaviour
         levelData = data.levelData;
         maxLevel = data.maxLevel;
         boughtNewMap = data.BoughtNewMap;
+        removeAdvertising = data.removeAdvertising;
     }
 }
