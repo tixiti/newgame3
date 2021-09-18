@@ -5,7 +5,7 @@ public class AdsManager : MonoBehaviour
 {
     public static AdsManager instance;
 
-    private BannerView _bannerView;
+    // private BannerView _bannerView;
 
     private InterstitialAd _interstitial;
 
@@ -26,7 +26,11 @@ public class AdsManager : MonoBehaviour
     {
         // Initialize the Google Mobile Ads SDK.
         MobileAds.Initialize((initStatus)=>{InitAdsDone();});
-        this.RequestBanner();
+        RequestConfiguration requestConfiguration = new RequestConfiguration.Builder()
+            .SetTagForUnderAgeOfConsent(TagForUnderAgeOfConsent.True)
+            .build();
+        MobileAds.SetRequestConfiguration(requestConfiguration);
+        // this.RequestBanner();
         this.RequestRewardedVideo();
         this.RequestInterstitial();
     }
@@ -44,7 +48,7 @@ public class AdsManager : MonoBehaviour
     {
         Debug.Log("OK");
     }
-    private void RequestBanner()
+   /* private void RequestBanner()
     {
 #if UNITY_ANDROID
         string adUnitId = "ca-app-pub-3940256099942544/6300978111";
@@ -66,7 +70,7 @@ public class AdsManager : MonoBehaviour
         this._bannerView.OnAdClosed += this.HandleOnBannerClosed;
         // Called when the ad click caused the user to leave the application.
 
-    }
+     }
     #region Handle Banner Callback
     public void HandleOnBannerLoaded(object sender, EventArgs args)
     {
@@ -97,7 +101,7 @@ public class AdsManager : MonoBehaviour
     {
         MonoBehaviour.print("HandleAdLeavingApplication event received");
     }
-    #endregion
+    #endregion*/
     private void RequestInterstitial()
     {
 #if UNITY_ANDROID
